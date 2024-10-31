@@ -144,4 +144,76 @@
 
 `UpdatedAt DateTime auto generated`
 
+## Endpoints
 
+#### Countries
+
+`GET /api/countries  Get All Countries`
+
+`POST /api/countries  Create New Country`
+
+`GET /api/countries/:id  Get Single Country By Id`
+
+`PUT /api/countries/:id  Update Single Country By Id`
+
+`DELETE /api/countries/:id  Delete Single Country By Id`
+
+#### Cities
+
+`GET /api/cities  Get All Cities`
+
+`POST /api/cities  Create New City`
+
+`GET /api/cities/:id  Get Single City By Id`
+
+`PUT /api/cities/:id  Update Single City By Id`
+
+`DELETE /api/cities/:id  Delete Single City By Id`
+
+#### Companies
+
+`GET /api/companies  Get All Companies`
+
+`POST /api/companies  Create New Company`
+
+`GET /api/companies/:id  Get Single Company By Id`
+
+`PUT /api/companies/:id  Update Single Company By Id`
+
+`DELETE /api/companies/:id  Delete Single Company By Id`
+
+#### Drivers
+
+`GET /api/drivers  Get All Drivers`
+
+`POST /api/drivers  Create New Driver`
+
+`GET /api/drivers/:id  Get Single Driver By Id`
+
+`PUT /api/drivers/:id  Update Single Driver By Id`
+
+`DELETE /api/drivers/:id  Delete Single Driver By Id`
+
+#### Vehicles
+
+`GET /api/vehicles  Get All Vehicles`
+
+`POST /api/vehicles  Create New Vehicle`
+
+`GET /api/vehicles/:id  Get Single Vehicle By Id`
+
+`PUT /api/vehicles/:id  Update Single Vehicle By Id`
+
+`DELETE /api/vehicles/:id  Delete Single Vehicle By Id`
+
+#### Journeys
+
+`GET /api/journeys  Get All Journeys`
+
+`POST /api/journeys  Create New Journey`
+
+`GET /api/journeys/:id  Get Single Journey By Id`
+
+`PUT /api/journeys/:id  Update Single Journey By Id`
+
+`DELETE /api/journeys/:id  Delete Single Journey By Id`
