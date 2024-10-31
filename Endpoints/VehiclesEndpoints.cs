@@ -1,6 +1,7 @@
 using Backend.Config;
 using Backend.Data.DTOs.Vehicle;
 using Backend.Data.Entities;
+using Backend.Services.CompanyServices;
 using Backend.Services.VehicleServices;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -16,13 +17,13 @@ public static class VehiclesEndpoints
 
         //Get All Vehicles
         //GET /api/vehicles
-        endpoint.MapGet("", async (IVehicleServices db) =>
+        endpoint.MapGet("", async (IVehicleServices vehicleService) =>
         {
             var response = new ApiResponse();
 
             try
             {
-                var vehicles = await db.GetAllVehiclesAsync();
+                var vehicles = await vehicleService.GetAllVehiclesAsync();
 
                 response.Data = vehicles;
                 response.IsSuccess = true;
@@ -40,7 +41,8 @@ public static class VehiclesEndpoints
 
         //Create New Vehicle
         //POST /api/vehicles
-        endpoint.MapPost("", async (IVehicleServices db,
+        endpoint.MapPost("", async (IVehicleServices vehicleService,
+            ICompanyServices companyService,
             IValidator<UpsertVehicle> validator,
             UpsertVehicle data) =>
         {
@@ -62,7 +64,17 @@ public static class VehiclesEndpoints
                     return Results.Json(response, statusCode: 400);
                 }
 
-                var newVehicle = await db.AddVehicleAsync(data);
+                var existCompany = await companyService.GetCompanyByIdAsync(data.CompanyId);
+
+                if (existCompany is null)
+                {
+                    response.IsSuccess = false;
+                    response.Errors.Add("الشركة غير موجودة");
+
+                    return Results.Json(response, statusCode: 400);
+                }
+
+                var newVehicle = await vehicleService.AddVehicleAsync(data);
 
                 if (newVehicle is null)
                 {
@@ -88,13 +100,13 @@ public static class VehiclesEndpoints
 
         //Get Single Vehicle By id
         //GET /api/vehicles/:id
-        endpoint.MapGet("{id:int}", async (IVehicleServices db, int id) =>
+        endpoint.MapGet("{id:int}", async (IVehicleServices vehicleService, int id) =>
         {
             var response = new ApiResponse();
 
             try
             {
-                var vehicle = await db.GetVehicleByIdAsync(id);
+                var vehicle = await vehicleService.GetVehicleByIdAsync(id);
 
                 if (vehicle is null)
                 {
@@ -120,7 +132,8 @@ public static class VehiclesEndpoints
 
         //Update Single Vehicle By id
         //PUT /api/vehicles/:id
-        endpoint.MapPut("{id:int}", async (int id, IVehicleServices db,
+        endpoint.MapPut("{id:int}", async (int id, IVehicleServices vehicleService,
+            ICompanyServices companyService,
             IValidator<UpsertVehicle> validator,
             UpsertVehicle data) =>
         {
@@ -142,7 +155,17 @@ public static class VehiclesEndpoints
                     return Results.Json(response, statusCode: 400);
                 }
 
-                var updatedVehicle = await db.UpdateVehicleAsync(id, data);
+                var existCompany = await companyService.GetCompanyByIdAsync(data.CompanyId);
+
+                if (existCompany is null)
+                {
+                    response.IsSuccess = false;
+                    response.Errors.Add("الشركة غير موجودة");
+
+                    return Results.Json(response, statusCode: 400);
+                }
+
+                var updatedVehicle = await vehicleService.UpdateVehicleAsync(id, data);
 
                 if (updatedVehicle is null)
                 {
@@ -168,13 +191,13 @@ public static class VehiclesEndpoints
 
         //Delete Single Vehicle By id
         //DELETE /api/vehicles/:id
-        endpoint.MapDelete("{id:int}", async (int id, IVehicleServices db) =>
+        endpoint.MapDelete("{id:int}", async (int id, IVehicleServices vehicleService) =>
         {
             var response = new ApiResponse();
 
             try
             {
-                var affRows = await db.DeleteVehicleAsync(id);
+                var affRows = await vehicleService.DeleteVehicleAsync(id);
 
                 if (affRows == 0)
                 {
