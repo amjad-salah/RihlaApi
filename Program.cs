@@ -4,12 +4,14 @@ using Backend.Data.DTOs.City;
 using Backend.Data.DTOs.Company;
 using Backend.Data.DTOs.Country;
 using Backend.Data.DTOs.Driver;
+using Backend.Data.DTOs.Journey;
 using Backend.Data.DTOs.Vehicle;
 using Backend.Endpoints;
 using Backend.Services.CityServices;
 using Backend.Services.CompanyServices;
 using Backend.Services.CountryServices;
 using Backend.Services.DriverServices;
+using Backend.Services.JourneyServices;
 using Backend.Services.VehicleServices;
 using Backend.Validations;
 using FluentValidation;
@@ -25,7 +27,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //JSON Handler
-builder.Services.Configure<JsonOptions>(options => 
+builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     options.SerializerOptions.WriteIndented = true;
@@ -41,6 +43,7 @@ builder.Services.AddScoped<IValidator<UpsertCompany>, CompanyValidation>();
 builder.Services.AddScoped<IValidator<UpsertCity>, CityValidation>();
 builder.Services.AddScoped<IValidator<UpsertDriver>, DriverValidation>();
 builder.Services.AddScoped<IValidator<UpsertVehicle>, VehicleValidation>();
+builder.Services.AddScoped<IValidator<UpsertJourney>, JourneyValidation>();
 
 //Services
 builder.Services.AddScoped<ICountryServices, CountryServices>();
@@ -48,6 +51,7 @@ builder.Services.AddScoped<ICompanyServices, CompanyServices>();
 builder.Services.AddScoped<ICityServices, CityServices>();
 builder.Services.AddScoped<IDriverServices, DriverServices>();
 builder.Services.AddScoped<IVehicleServices, VehicleServices>();
+builder.Services.AddScoped<IJourneyServices, JourneyServices>();
 
 var app = builder.Build();
 
@@ -65,5 +69,6 @@ app.MapCompaniesEndpoints();
 app.MapCitiesEndpoints();
 app.MapDriversEndpoints();
 app.MapVehiclesEndpoints();
+app.MapJourneysEndpoints();
 
 app.Run();
