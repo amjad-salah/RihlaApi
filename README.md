@@ -2,8 +2,6 @@
 
 ## Models
 
----
-
 #### Country
 
 `Id int not null` PK
