@@ -1,0 +1,6 @@
+@Backend_HostAddress = http://localhost:5214/api
+
+GET {{Backend_HostAddress}}/cities/
+Accept: application/json
+
+###
