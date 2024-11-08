@@ -20,7 +20,7 @@
 
 `Name string not null`
 
-`CountrId id not null` FK => Country
+`CountryId id not null` FK => Country
 
 `CreatedAt DateTime auto generated`
 
@@ -38,7 +38,7 @@
 
 `Email string`
 
-`CountrId id not null` FK => Country
+`CountryId id not null` FK => Country
 
 `CreatedAt DateTime auto generated`
 
@@ -68,11 +68,11 @@
 
 `PlateNo string not null`
 
-`VehiclType string not null` => (شاحنة، ركاب)
+`VehicleType string not null` => (شاحنة، ركاب)
 
 `NoOfSeats int`
 
-`TotalWegiht int`
+`TotalWeight int`
 
 `CompanyId id not null` FK => Country
 
