@@ -1,4 +1,4 @@
-# Rihal API Backend
+# Rihla API Backend
 
 ## Models
 
