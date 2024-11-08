@@ -1,6 +1,4 @@
-using System.ComponentModel.DataAnnotations;
 using Backend.Config;
-using Backend.Data.Context;
 using Backend.Data.DTOs.Driver;
 using Backend.Services.CompanyServices;
 using Backend.Services.DriverServices;

@@ -1,10 +1,8 @@
 using Backend.Config;
 using Backend.Data.DTOs.Vehicle;
-using Backend.Data.Entities;
 using Backend.Services.CompanyServices;
 using Backend.Services.VehicleServices;
 using FluentValidation;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Backend.Endpoints;
 
